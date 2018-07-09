@@ -1,0 +1,18 @@
+{
+  "name": "decorators",
+  "version": "0.0.1",
+  "description": "test with decorators",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Philipp Fock",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^10.5.1"
+  },
+  "dependencies": {
+    "@types/reflect-metadata": "^0.1.0",
+    "reflect-metadata": "^0.1.12"
+  }
+}

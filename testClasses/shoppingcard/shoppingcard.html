@@ -1,0 +1,23 @@
+<ion-content>
+	<ion-grid>
+		<ion-row class='headlineRow'>
+			<ion-title>Function</ion-title>
+		</ion-row>
+		<ion-row class='headlineRow'>
+			<button ion-button class='standardBtn' (click)='addFunction()'>Function hinzufügen</button>
+		</ion-row>
+		<ion-row class='itemRow'>
+			<ion-col col-12>
+				<ion-title text-center>{{shoppingcard.name}}</ion-title>
+			</ion-col>
+			<ion-col col-6 class='centeredContent'>
+				<ion-label text-center>Shopping cart name</ion-label>
+				<ion-input type='text' [(ngModel)]='shoppingcard.name' placeholder='e.g. Louis Bakery' [disabled]='shoppingcard.changeActivated'></ion-input>
+			</ion-col>
+			<ion-col col-12 class='centeredContent'>
+				<ion-label text-center>Delivery date</ion-label>
+				<ion-datetime displayFormat='DD.MMM.YYYY' [(ngModel)]='shoppingcard.deliveryDate'></ion-datetime>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
