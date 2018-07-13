@@ -24,13 +24,13 @@ export class IonicStyle extends BaseStyle {
         return preAppendix(super.generateModuleHelper(classTitle, imports, "", "", ""), pageModuleImport);
     }
 
-    acceptBtn(className: string): string {
+    acceptBtn(className: string, acceptText: string): string {
         return start+'\t\t\t<button ion-button icon-only class="standardBtn updateBtn" (click)="update'+className+'('+className.toLowerCase()+')">'+
         start+'\t\t\t\t<ion-icon name="checkmark-circle"></ion-icon>'+
         start+'\t\t\t</button>';
     }
 
-    closeBtn(className: string): string {
+    closeBtn(className: string, closeText: string): string {
         return start+'\t\t\t<button ion-button icon-only class="cancelChangeBtn standardBtn" (click)="cancelChange('+className.toLowerCase()+')">'+
         start+'\t\t\t\t<ion-icon name="close-circle"></ion-icon>'+
         start+'\t\t\t</button>';

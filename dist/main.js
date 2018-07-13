@@ -37,6 +37,7 @@ function generateFormComponent(filePath, className) {
             let selector = (classToGenerate[':selector']) ? classToGenerate[':selector'] : lwcClassTitle + "-component";
             let listActivated = classToGenerate[':ngFor'];
             let styleClass = classToGenerate[':styleClass'];
+            let languageStyleClass = classToGenerate[':languageStyle'];
             if (!styleClass)
                 throw new Error("You have to define own class as style class through using a decorator like @Ionic");
             let formGroupActivated = classToGenerate[":formGroup"];
@@ -56,19 +57,19 @@ function generateFormComponent(filePath, className) {
                     ngFor = ` *ngFor='let ${className.toLowerCase()} of ${pluralClassTitle}; let i = index'`;
                 }
                 editBtn = exports.start + "<:col *ngIf='!" + lwcClassTitle + ".changeActivated' col-2 class=\"centeredContent\">" +
-                    exports.start + "\t<:button class='standardBtn editBtn' (click)='enableChange(" + lwcClassTitle + ")'>Bearbeiten</:button>" +
+                    exports.start + "\t<:button class='standardBtn editBtn' (click)='enableChange(" + lwcClassTitle + ")'>" + languageStyleClass.edit(className) + "</:button>" +
                     exports.start + "</:col>";
                 deleteBtn = exports.start + '<:col col-2 class="centeredContent">' +
-                    exports.start + '\t<:button class="standardBtn deleteBtn" (click)="delete' + className + '(' + ((formGroupActivated) ? "i" : lwcClassTitle) + ')">Löschen</:button>' +
+                    exports.start + '\t<:button class="standardBtn deleteBtn" (click)="delete' + className + '(' + ((formGroupActivated) ? "i" : lwcClassTitle) + ')">' + languageStyleClass.delete(className) + '</:button>' +
                     exports.start + '</:col>';
                 actionBtns =
                     exports.start + '<:col class="centeredContent actionBtnsCol" col-2 *ngIf="' + lwcClassTitle + '.changeActivated">' +
                         exports.start + '\t<:row>' +
                         exports.start + '\t\t<:col col-6 class="centeredContent">' +
-                        styleClass.acceptBtn(className) +
+                        styleClass.acceptBtn(className, languageStyleClass.save(className)) +
                         exports.start + '\t\t</:col>' +
                         exports.start + '\t\t<:col col-6 class="centeredContent">' +
-                        styleClass.closeBtn(className) +
+                        styleClass.closeBtn(className, languageStyleClass.close(className)) +
                         exports.start + '\t\t</:col>' +
                         exports.start + '\t</:row>' +
                         exports.start + '</:col>';
@@ -83,7 +84,7 @@ function generateFormComponent(filePath, className) {
                 propertyDefinitionType = className;
             }
             let tsOutput = utils_1.generateStandardTsOutput(className, selector, classToGenerate[":classPrefix"], lwcClassTitle + ".html");
-            let htmlOutput = styleClass.beginning(className, listActivated, formGroupActivated, formGroupProperty)
+            let htmlOutput = styleClass.beginning(className, listActivated, formGroupActivated, formGroupProperty, languageStyleClass.add(className))
                 + `\n\t\t<:row`
                 + ngFor
                 + " class='itemRow'>"

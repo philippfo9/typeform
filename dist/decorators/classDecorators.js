@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const IonicStyle_1 = require("../model/IonicStyle");
+const IonicStyle_1 = require("../styleModels/IonicStyle");
 require("reflect-metadata");
-const NormalStyle_1 = require("../model/NormalStyle");
+const NormalStyle_1 = require("../styleModels/NormalStyle");
+const germanStyle_1 = require("../languageModels/germanStyle");
+const englishStyle_1 = require("../languageModels/englishStyle");
 function List(target) {
     target.prototype[':ngFor'] = true;
 }
@@ -50,3 +52,11 @@ function IonicPage(configObj) {
     };
 }
 exports.IonicPage = IonicPage;
+function German(target) {
+    target.prototype[':languageStyle'] = new germanStyle_1.GermanLanguageStyle();
+}
+exports.German = German;
+function English(target) {
+    target.prototype[':languageStyle'] = new englishStyle_1.EnglishLanguageStyle();
+}
+exports.English = English;

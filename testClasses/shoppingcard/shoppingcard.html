@@ -10,23 +10,23 @@
 				</ion-col>
 				<ion-col col-12 class='centeredContent' >
 					<ion-label text-center>Items</ion-label>
-					<ion-select [(ngModel)]='shoppingcard.items' formControlName='items'  [disabled]='!shoppingcard.changeActivated' multiple='true'>
+					<ion-select [(ngModel)]='shoppingcard.items' formControlName='items'   multiple='true'>
 						<ion-option *ngFor='let item of items' [value]='item.id'>{{ item.name }}</ion-option>
 					</ion-select>
 				</ion-col>
 				<ion-col col-12 class='centeredContent' >
 					<ion-label text-center>Main-Item</ion-label>
-					<ion-select [(ngModel)]='shoppingcard.mainItem' formControlName='mainItem'  [disabled]='!shoppingcard.changeActivated' >
+					<ion-select [(ngModel)]='shoppingcard.mainItem' formControlName='mainItem'   >
 						<ion-option *ngFor='let item of items' [value]='item.id'>{{ item.name }}</ion-option>
 					</ion-select>
 				</ion-col>
 				<ion-col col-12 class='centeredContent' >
 					<ion-label text-center>Description</ion-label>
-					<ion-input type='text' [(ngModel)]='shoppingcard.note' formControlName='note' placeholder='this shopping card is used for ...' [disabled]='!shoppingcard.changeActivated'></ion-input>
+					<ion-input type='text' [(ngModel)]='shoppingcard.note' formControlName='note' placeholder='this shopping card is used for ...' ></ion-input>
 				</ion-col>
 				<ion-col col-6 class='centeredContent' >
 					<ion-label text-center>Shopping cart name</ion-label>
-					<ion-input type='text' [(ngModel)]='shoppingcard.name' formControlName='name' placeholder='e.g. Louis Bakery' [disabled]='!shoppingcard.changeActivated'></ion-input>
+					<ion-input type='text' [(ngModel)]='shoppingcard.name' formControlName='name' placeholder='e.g. Louis Bakery' ></ion-input>
 				</ion-col>
 				<ion-col col-12 class='centeredContent' >
 					<ion-label text-center>Delivery date</ion-label>

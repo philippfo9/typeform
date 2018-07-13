@@ -5,7 +5,7 @@
 			<ion-title>Item</ion-title>
 		</ion-row>
 		<ion-row class='addElementRow'>
-			<button ion-button class='standardBtn' (click)='addItem()'>Add Item</button>
+			<button ion-button class='standardBtn' (click)='addItem()'>Item hinzufügen</button>
 		</ion-row>
 		<ion-row formArrayName='items' *ngFor='let item of ItemForm.get("items").controls; let i = index' class='itemRow'>
 			<div class='formWrapper' [formGroupName]='i'>

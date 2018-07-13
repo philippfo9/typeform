@@ -98,7 +98,7 @@ function mapClassTags(strInput) {
 }
 exports.mapClassTags = mapClassTags;
 function removeDisabledAttributes(strInput, lwcClassTitle) {
-    let search = "\\[disabled\\]='" + lwcClassTitle + ".changeActivated'".trim();
+    let search = "\\[disabled\\]='!" + lwcClassTitle + ".changeActivated'".trim();
     return replaceAll(strInput, search, "");
 }
 exports.removeDisabledAttributes = removeDisabledAttributes;

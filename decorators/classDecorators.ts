@@ -1,6 +1,8 @@
-import {IonicStyle} from "../model/IonicStyle";
+import {IonicStyle} from "../styleModels/IonicStyle";
 import "reflect-metadata";
-import {NormalStyle} from "../model/NormalStyle";
+import {NormalStyle} from "../styleModels/NormalStyle";
+import {GermanLanguageStyle} from "../languageModels/germanStyle";
+import {EnglishLanguageStyle} from "../languageModels/englishStyle";
 
 export function List(target: any) {
     target.prototype[':ngFor'] = true;
@@ -47,5 +49,14 @@ export function IonicPage(configObj?: any) {
         }
         target.prototype[':classPrefix'] = "\n\n@IonicPage("+ configObjString +")";
     };
+}
+
+
+export function German(target: any) {
+    target.prototype[':languageStyle'] = new GermanLanguageStyle();
+}
+
+export function English(target: any) {
+    target.prototype[':languageStyle'] = new EnglishLanguageStyle();
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "typeform",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "a form generation library for ionic/angular",
   "main": "main.js",
   "scripts": {

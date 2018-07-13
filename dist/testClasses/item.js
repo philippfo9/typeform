@@ -38,6 +38,7 @@ Item = __decorate([
     classDecorators_1.Module,
     classDecorators_1.Ionic,
     classDecorators_1.FormGroup,
+    classDecorators_1.German,
     classDecorators_1.IonicPage({
         name: 'item-page'
     }),

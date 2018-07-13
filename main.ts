@@ -7,8 +7,9 @@ import {
     preAppendix, removeDisabledAttributes, removeFormControlNameAttributes
 } from "./utils/utils";
 import "reflect-metadata";
-import {BaseStyle} from "./model/BaseStyle";
-import {IonicStyle} from "./model/IonicStyle";
+import {BaseStyle} from "./styleModels/BaseStyle";
+import {IonicStyle} from "./styleModels/IonicStyle";
+import {BasicLanguageStyle} from "./languageModels/basicLanguageStyle";
 
 export const start = "\n\t\t\t\t";
 let filePath = process.argv[2];
@@ -38,6 +39,7 @@ async function generateFormComponent(filePath, className) {
         let selector = (classToGenerate[':selector'])?classToGenerate[':selector']:lwcClassTitle+"-component";
         let listActivated = classToGenerate[':ngFor'];
         let styleClass: BaseStyle = classToGenerate[':styleClass'];
+        let languageStyleClass: BasicLanguageStyle = classToGenerate[':languageStyle'];
         if(!styleClass)
             throw new Error("You have to define own class as style class through using a decorator like @Ionic");
 
@@ -72,19 +74,19 @@ async function generateFormComponent(filePath, className) {
             }
 
             editBtn = start+"<:col *ngIf='!"+lwcClassTitle+".changeActivated' col-2 class=\"centeredContent\">" +
-                start+"\t<:button class='standardBtn editBtn' (click)='enableChange("+lwcClassTitle+")'>Bearbeiten</:button>" +
+                start+"\t<:button class='standardBtn editBtn' (click)='enableChange("+lwcClassTitle+")'>"+languageStyleClass.edit(className)+"</:button>" +
                 start+"</:col>";
             deleteBtn = start+'<:col col-2 class="centeredContent">' +
-                start+'\t<:button class="standardBtn deleteBtn" (click)="delete'+className+'('+((formGroupActivated)?"i":lwcClassTitle)+')">Löschen</:button>' +
+                start+'\t<:button class="standardBtn deleteBtn" (click)="delete'+className+'('+((formGroupActivated)?"i":lwcClassTitle)+')">'+languageStyleClass.delete(className)+'</:button>' +
                 start+'</:col>';
             actionBtns =
                 start+'<:col class="centeredContent actionBtnsCol" col-2 *ngIf="'+lwcClassTitle+'.changeActivated">'+
                 start+'\t<:row>'+
                 start+'\t\t<:col col-6 class="centeredContent">'+
-                styleClass.acceptBtn(className) +
+                styleClass.acceptBtn(className, languageStyleClass.save(className)) +
                 start+'\t\t</:col>'+
                 start+'\t\t<:col col-6 class="centeredContent">'+
-                styleClass.closeBtn(className) +
+                styleClass.closeBtn(className, languageStyleClass.close(className)) +
                 start+'\t\t</:col>'+
                 start+'\t</:row>'+
                 start+'</:col>';
@@ -100,7 +102,7 @@ async function generateFormComponent(filePath, className) {
         }
 
         let tsOutput = generateStandardTsOutput(className, selector, classToGenerate[":classPrefix"], lwcClassTitle+".html");
-        let htmlOutput = styleClass.beginning(className, listActivated, formGroupActivated, formGroupProperty)
+        let htmlOutput = styleClass.beginning(className, listActivated, formGroupActivated, formGroupProperty, languageStyleClass.add(className))
             + `\n\t\t<:row`
             // check if *ngFor should be applied
             + ngFor

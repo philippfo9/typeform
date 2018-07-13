@@ -3,7 +3,7 @@ import {start} from "../main";
 
 export class BaseStyle {
     prefix: string;
-    beginning(classTitle: string, listActivated: boolean, formGroupActivated: boolean, formGroupName): any {
+    beginning(classTitle: string, listActivated: boolean, formGroupActivated: boolean, formGroupName: string, addText: string): any {
             return "<:content>" +
                 ((formGroupActivated)?"\n\t<form [formGroup]='"+formGroupName+"'>":"")+
                 "\n\t<:grid>" +
@@ -12,7 +12,7 @@ export class BaseStyle {
                 "\n\t\t</:row>" +
                 ((listActivated) ?
                     "\n\t\t<:row class='addElementRow'>" +
-                    "\n\t\t\t<:button class='standardBtn' (click)='add" + classTitle + "()'>Add " + classTitle + "</button>" +
+                    "\n\t\t\t<:button class='standardBtn' (click)='add" + classTitle + "()'>" + addText + "</button>" +
                     "\n\t\t</:row>" : "");
     }
 
@@ -64,15 +64,15 @@ export class BaseStyle {
         return output;
     }
 
-    acceptBtn(className: string): string {
+    acceptBtn(className: string, acceptText: string): string {
         return start+'\t\t\t<:button class="standardBtn updateBtn" (click)="update'+className+'('+className.toLowerCase()+')">'+
-            start+'\t\t\t\tSpeichern'+
+            start+'\t\t\t\t'+acceptText+
             start+'\t\t\t</:button>';
     }
 
-    closeBtn(className: string): string {
+    closeBtn(className: string, closeText: string): string {
         return start+'\t\t\t<:button class="cancelChangeBtn standardBtn" (click)="cancelChange('+className.toLowerCase()+')">'+
-        start+'\t\t\t\tClose'+
+        start+'\t\t\t\t'+closeText+
         start+'\t\t\t</:button>';
     }
 

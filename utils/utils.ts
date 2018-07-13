@@ -97,7 +97,7 @@ export function mapClassTags(strInput: string) {
 }
 
 export function removeDisabledAttributes(strInput: string, lwcClassTitle) {
-    let search = "\\[disabled\\]='"+lwcClassTitle+".changeActivated'".trim();
+    let search = "\\[disabled\\]='!"+lwcClassTitle+".changeActivated'".trim();
     return replaceAll(strInput, search, "");
 }
 

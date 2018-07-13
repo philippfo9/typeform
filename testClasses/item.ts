@@ -1,10 +1,11 @@
-import {FormGroup, Ionic, IonicPage, List, Module, Normal} from "../decorators/classDecorators";
+import {FormGroup, German, Ionic, IonicPage, List, Module, Normal} from "../decorators/classDecorators";
 import {Col, OnlyVisibleInEditMode, Title} from "../decorators/propertyDecorators";
 
 @List
 @Module
 @Ionic
 @FormGroup
+@German
 @IonicPage({
     name: 'item-page'
 })
