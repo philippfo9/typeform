@@ -10,8 +10,11 @@ import "reflect-metadata";
 import {BaseStyle} from "./styleModels/BaseStyle";
 import {IonicStyle} from "./styleModels/IonicStyle";
 import {BasicLanguageStyle} from "./languageModels/basicLanguageStyle";
+import {TestClass} from "./testClasses/test";
+import {EnglishLanguageStyle} from "./languageModels/englishStyle";
 
 export const start = "\n\t\t\t\t";
+let test = new TestClass();
 let filePath = process.argv[2];
 let className = "";
 if(process.argv[3])
@@ -21,7 +24,7 @@ generateFormComponent(filePath, className);
 
 async function generateFormComponent(filePath, className) {
     console.log("starting generation ...");
-    if(fs.existsSync(filePath+".ts")) {
+    if(fs.existsSync(filePath)) {
         //dynamic import of file
         let file = await <any>import(filePath);
         let splitFilePathArr = filePath.split("/");
@@ -29,8 +32,8 @@ async function generateFormComponent(filePath, className) {
         let pathTo = filePath.substring(0,filePath.length-fileName.length);
 
         if(className == "") {
-            let fileSrc = fs.readFileSync(filePath+".ts").toString();
-            className = fileSrc.substring(fileSrc.indexOf("export class") + "export class".length).split(' ')[1];
+            let fileSrc = fs.readFileSync(filePath).toString();
+            className = fileSrc.substring(fileSrc.indexOf("class ") + "class ".length).split(' ')[0];
         }
         console.log("generating form component for class: " + className + " ...");
         let classToGenerate: any = new file[className]();
@@ -39,9 +42,11 @@ async function generateFormComponent(filePath, className) {
         let selector = (classToGenerate[':selector'])?classToGenerate[':selector']:lwcClassTitle+"-component";
         let listActivated = classToGenerate[':ngFor'];
         let styleClass: BaseStyle = classToGenerate[':styleClass'];
-        let languageStyleClass: BasicLanguageStyle = classToGenerate[':languageStyle'];
         if(!styleClass)
             throw new Error("You have to define own class as style class through using a decorator like @Ionic");
+
+        let languageStyleClass: BasicLanguageStyle = classToGenerate[':languageStyle'] || new EnglishLanguageStyle();
+        console.log(languageStyleClass);
 
         let formGroupActivated = classToGenerate[":formGroup"];
         let formGroupProperty = className+"Form";
@@ -49,6 +54,7 @@ async function generateFormComponent(filePath, className) {
 
         let ngFor = "",
             formArrayDiv = "",
+            addBtn = "",
             editBtn = "",
             deleteBtn = "",
             actionBtns = "",
@@ -73,6 +79,9 @@ async function generateFormComponent(filePath, className) {
                 ngFor = ` *ngFor='let ${className.toLowerCase()} of ${pluralClassTitle}; let i = index'`;
             }
 
+            addBtn = "\n\t\t<:row class='addElementRow'>" +
+                "\n\t\t\t<:button class='standardBtn' (click)='add" + className + "()'>" + languageStyleClass.add(className) + "</button>" +
+                "\n\t\t</:row>";
             editBtn = start+"<:col *ngIf='!"+lwcClassTitle+".changeActivated' col-2 class=\"centeredContent\">" +
                 start+"\t<:button class='standardBtn editBtn' (click)='enableChange("+lwcClassTitle+")'>"+languageStyleClass.edit(className)+"</:button>" +
                 start+"</:col>";
@@ -102,7 +111,8 @@ async function generateFormComponent(filePath, className) {
         }
 
         let tsOutput = generateStandardTsOutput(className, selector, classToGenerate[":classPrefix"], lwcClassTitle+".html");
-        let htmlOutput = styleClass.beginning(className, listActivated, formGroupActivated, formGroupProperty, languageStyleClass.add(className))
+        let htmlOutput = styleClass.beginning(className, formGroupActivated, formGroupProperty)
+            + addBtn
             + `\n\t\t<:row`
             // check if *ngFor should be applied
             + ngFor

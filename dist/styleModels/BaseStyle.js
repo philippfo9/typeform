@@ -3,17 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils/utils");
 const main_1 = require("../main");
 class BaseStyle {
-    beginning(classTitle, listActivated, formGroupActivated, formGroupName, addText) {
+    beginning(classTitle, formGroupActivated, formGroupName) {
         return "<:content>" +
             ((formGroupActivated) ? "\n\t<form [formGroup]='" + formGroupName + "'>" : "") +
             "\n\t<:grid>" +
             "\n\t\t<:row class='headlineRow'>" +
             "\n\t\t\t<:title>" + classTitle + "</:title>" +
-            "\n\t\t</:row>" +
-            ((listActivated) ?
-                "\n\t\t<:row class='addElementRow'>" +
-                    "\n\t\t\t<:button class='standardBtn' (click)='add" + classTitle + "()'>" + addText + "</button>" +
-                    "\n\t\t</:row>" : "");
+            "\n\t\t</:row>";
     }
     ending(formGroupActivated, listActivated) {
         return ((formGroupActivated && listActivated) ? "\n\t\t\t</div>" : "") +

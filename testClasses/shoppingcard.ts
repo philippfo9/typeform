@@ -1,6 +1,6 @@
 import {Item} from "./item";
 import {Col, Title, ArrayType, Relation, Required} from "../decorators/propertyDecorators";
-import {FormGroup, Ionic, List, Module, Selector} from "../decorators/classDecorators";
+import {FormGroup, German, Ionic, List, Module, Selector} from "../decorators/classDecorators";
 
 @Ionic
 @FormGroup

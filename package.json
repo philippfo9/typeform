@@ -1,8 +1,11 @@
 {
   "name": "typeform",
+  "bin": {
+    "typeform": "dist/main.js"
+  },
   "version": "0.1.0",
-  "description": "a form generation library for ionic/angular",
-  "main": "main.js",
+  "description": "form generation library for ionic/angular using typescript classes",
+  "main": "dist/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,5 +17,13 @@
   "dependencies": {
     "@types/reflect-metadata": "^0.1.0",
     "reflect-metadata": "^0.1.12"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philippfo9/typeform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/philippfo9/typeform/issues"
+  },
+  "homepage":"https://github.com/philippfo9/typeform#readme"
 }

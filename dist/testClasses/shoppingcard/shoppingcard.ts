@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Shoppingcard } from "../shoppingcard";
+import { Shoppingcard } from "../shoppingcard.js";
 import { Component } from '@angular/core';
 @Component({
 	selector: 'shoppingCard',

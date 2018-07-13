@@ -3,17 +3,13 @@ import {start} from "../main";
 
 export class BaseStyle {
     prefix: string;
-    beginning(classTitle: string, listActivated: boolean, formGroupActivated: boolean, formGroupName: string, addText: string): any {
+    beginning(classTitle: string, formGroupActivated: boolean, formGroupName: string): any {
             return "<:content>" +
                 ((formGroupActivated)?"\n\t<form [formGroup]='"+formGroupName+"'>":"")+
                 "\n\t<:grid>" +
                 "\n\t\t<:row class='headlineRow'>" +
                 "\n\t\t\t<:title>" + classTitle + "</:title>" +
-                "\n\t\t</:row>" +
-                ((listActivated) ?
-                    "\n\t\t<:row class='addElementRow'>" +
-                    "\n\t\t\t<:button class='standardBtn' (click)='add" + classTitle + "()'>" + addText + "</button>" +
-                    "\n\t\t</:row>" : "");
+                "\n\t\t</:row>";
     }
 
     ending(formGroupActivated: boolean, listActivated: boolean): any {

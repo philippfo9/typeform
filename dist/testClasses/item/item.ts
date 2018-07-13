@@ -1,6 +1,6 @@
 import { IonicPage } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators , FormArray} from '@angular/forms';
-import { Item } from "../item.ts";
+import { Item } from "../item.js";
 import { Component } from '@angular/core';
 
 @IonicPage({
