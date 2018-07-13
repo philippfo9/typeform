@@ -1,6 +1,5 @@
 import {Col} from "../decorators/propertyDecorators";
-import {Ionic} from "../decorators/ionicClassDecorators";
-import {List} from "../decorators/classDecorators";
+import {Ionic, List} from "../decorators/classDecorators";
 
 @Ionic
 @List

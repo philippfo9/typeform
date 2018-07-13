@@ -9,24 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const propertyDecorators_1 = require("../decorators/propertyDecorators");
 const classDecorators_1 = require("../decorators/classDecorators");
-let TestClass = class TestClass {
+const propertyDecorators_1 = require("../decorators/propertyDecorators");
+let Item = class Item {
     constructor() {
-        this.testProp = 2;
+        this.id = 0;
+        this.name = "";
+        this.price = 0;
+        this.isSoldOut = false;
     }
 };
 __decorate([
-    propertyDecorators_1.Col(3, true, "label", "placeholder"),
+    propertyDecorators_1.Col(4, true, "Item-Name", "e.g. Pokeball"),
+    propertyDecorators_1.Title,
+    __metadata("design:type", String)
+], Item.prototype, "name", void 0);
+__decorate([
+    propertyDecorators_1.Col(4, true, "Item-Price", "e.g. 4.90"),
     __metadata("design:type", Number)
-], TestClass.prototype, "testProp", void 0);
-TestClass = __decorate([
-    classDecorators_1.Ionic,
+], Item.prototype, "price", void 0);
+__decorate([
+    propertyDecorators_1.Col(6, true, "Is sold out?"),
+    propertyDecorators_1.OnlyVisibleInEditMode,
+    __metadata("design:type", Boolean)
+], Item.prototype, "isSoldOut", void 0);
+Item = __decorate([
     classDecorators_1.List,
+    classDecorators_1.Module,
+    classDecorators_1.Ionic,
+    classDecorators_1.FormGroup,
+    classDecorators_1.IonicPage({
+        name: 'item-page'
+    }),
     __metadata("design:paramtypes", [])
-], TestClass);
-exports.TestClass = TestClass;
-function generateClass() {
-    return new TestClass();
-}
-exports.generateClass = generateClass;
+], Item);
+exports.Item = Item;

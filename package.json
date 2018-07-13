@@ -1,7 +1,7 @@
 {
-  "name": "decorators",
+  "name": "typeform",
   "version": "0.0.1",
-  "description": "test with decorators",
+  "description": "a form generation library for ionic/angular",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
